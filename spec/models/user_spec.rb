@@ -65,29 +65,29 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
-      it 'パスワード（確認含む）が半角英字でないと保存できない' do
+      it 'パスワードが数字のみでは登録できない' do
         @user.password = '123456'
         @user.password_confirmation = '123456'
         @user.valid?
-        expect(@user.errors.full_messages).to include
+        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
       end
-      it 'パスワード（確認含む）が半角数字でないと保存できない' do
+      it 'パスワードが英字のみでは登録できない' do
         @user.password = 'tanaka'
         @user.password_confirmation = 'tanaka'
         @user.valid?
-        expect(@user.errors.full_messages).to include
+        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
       end
       it 'パスワードはパスワード確認と不一致であれば保存できない' do
         @user.password = '123abc'
-        @user.password_confirmation = ''
+        @user.password_confirmation = '321cab'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
-      it 'パスワードは全角英数字混合では保存できない' do
-        @user.password = '123abc'
-        @user.password_confirmation = ''
+      it 'パスワードに全角が含まれている場合、保存できない' do
+        @user.password = 'ああああああ'
+        @user.password_confirmation = 'ああああああ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
       end
       it '名字が全角（漢字・ひらがな・カタカナ）でないと登録できない' do
         @user.last_name = 'tanaka'
