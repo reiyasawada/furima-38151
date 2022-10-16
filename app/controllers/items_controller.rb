@@ -20,9 +20,8 @@ class ItemsController < ApplicationController
     end
   end
 
-  def show
-
-  end
+  #def show
+  #end
 
   private
 
@@ -31,7 +30,7 @@ class ItemsController < ApplicationController
                                  :arrival_day_id, :price).merge(user_id: current_user.id)
   end
 
-  def set_item
-    @item = Item.find(params[:id])
-  end
+  #def set_item
+    #@item = Item.find(params[:id])
+  #end
 end
