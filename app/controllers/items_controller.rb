@@ -28,7 +28,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-
     @item.update(item_params)
     # バリデーションがOKであれば詳細画面へ
     if @item.valid?
@@ -39,14 +38,13 @@ class ItemsController < ApplicationController
     end
   end
 
-  
   def show
   end
 
   def destroy
     if @item.user_id == current_user.id
-     @item.destroy
-     redirect_to root_path
+      @item.destroy
+      redirect_to root_path
     else
       redirect_to root_path
     end
@@ -62,5 +60,4 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
-
 end
