@@ -123,9 +123,11 @@
   <div class='item-contents'>
     <h2 class='title'>ピックアップカテゴリー</h2>
     <%= link_to '新規投稿商品', new_item_path , class: "subtitle" %>
+    
     <ul class='item-lists'>
-    <% @items.each do |item| %>
-      <li class='list'>
+
+      <li form_with class='list'>
+        <% @items.each do |item| %>
         <%= link_to item_path(item.id) do %>
         <div class='item-img-content'>
         <%= image_tag item.image.variant(resize: '500x500'), class: "item-img" if item.image.attached? %>
